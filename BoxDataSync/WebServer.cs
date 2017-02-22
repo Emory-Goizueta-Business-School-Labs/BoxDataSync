@@ -38,6 +38,9 @@ using System.Threading.Tasks;
 
 namespace BoxDataSync
 {
+    /// <summary>
+    /// Implements a simple web server class
+    /// </summary>
     public class WebServer
     {
 
@@ -45,6 +48,11 @@ namespace BoxDataSync
         private readonly Func<HttpListenerRequest, string> _responderMethod;
         private static int _requestsProcessed = 0;
 
+        /// <summary>
+        /// WebServer Constructor.
+        /// </summary>
+        /// <param name="prefixes">URL of Webserver Path to listen on.</param>
+        /// <param name="method">HTTP Listener Callback Function</param>
         public WebServer(string[] prefixes, Func<HttpListenerRequest, string> method)
         {
             if (!HttpListener.IsSupported)
@@ -62,8 +70,16 @@ namespace BoxDataSync
             _listener.Start();
         }
 
+        /// <summary>
+        /// WebServer Constructor
+        /// </summary>
+        /// <param name="method">HTTP Listener Callback function</param>
+        /// <param name="prefixes">URL of Webserver Path to listen on.</param>
         public WebServer(Func<HttpListenerRequest, string> method, params string[] prefixes) : this(prefixes, method) { }
 
+        /// <summary>
+        /// Starts the Web Server
+        /// </summary>
         public void Run()
         {
             ThreadPool.QueueUserWorkItem((o) =>
@@ -97,11 +113,18 @@ namespace BoxDataSync
             });
         }
 
+        /// <summary>
+        /// Returns number of requests processed.
+        /// </summary>
+        /// <returns>Number of requests processed.</returns>
         public int RequestsProcessed()
         {
             return _requestsProcessed;
         }
                
+        /// <summary>
+        /// Stops the web server and closes the listener.
+        /// </summary>
         public void Stop()
         {
             _listener.Stop();

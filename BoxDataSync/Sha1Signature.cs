@@ -33,9 +33,18 @@ using System.IO;
 
 namespace BoxDataSync
 {
+
+    /// <summary>
+    /// Simple static method access to get an SHA1 file signature. Borrowed from mgbowen http://stackoverflow.com/questions/1993903/how-do-i-do-a-sha1-file-checksum-in-c
+    /// </summary>
     public static class Sha1Signature
     {
 
+        /// <summary>
+        /// Returns the human readable SHA1 hash / checksum of the file. 
+        /// </summary>
+        /// <param name="path">Path to the file to checksum. eg, c:\path\to\a\file.txt</param>
+        /// <returns>The SHA1 signature / checksum of the file.</returns>
         public static String getFileSignature(String path)
         {
             if (!File.Exists(path)) { return ""; }

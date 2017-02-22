@@ -33,12 +33,24 @@ using System.Security.Cryptography;
 
 namespace BoxDataSync
 {
+#pragma warning disable CS0168
+    /// <summary>
+    /// Provides easy static access methods to the System.Security.Cryptography.ProtectedData calls, including Base64 encoding/deconding for
+    /// working with human readable data (uuencoded string representations of the underlying binary encrypted data)
+    /// </summary>
     class Encryption
     {
 
+        // change this if you want a little more security.
         static byte[] s_aditionalEntropy = { 2, 8, 4, 7, 2 };
 
 
+        /// <summary>
+        /// Ecrypts an arbitrary length string using the ProtectedData system call and returns the encrypted version in a Base64/uuencoded string.
+        /// </summary>
+        /// <param name="input">String to be encrypted.</param>
+        /// <param name="scope">DataProtectionScope to be used (default: DataProtectionScope.CurrentUser)</param>
+        /// <returns>Base64/uuencoded version of the encrypted data.</returns>
         public static String Protect64(String input, DataProtectionScope scope = DataProtectionScope.CurrentUser)
         {
             try
@@ -53,6 +65,12 @@ namespace BoxDataSync
             }
         }
 
+        /// <summary>
+        /// Decrypts an arbitrary length Base64/uuencoded encrypted string using the ProtectedData system call and returns the original string.
+        /// </summary>
+        /// <param name="input">Base64/uuencoded version of the encrypted data.</param>
+        /// <param name="scope">DataProtectionScope to be used (default: DataProtectionScope.CurrentUser)</param>
+        /// <returns>The original, unencrypted data string.</returns>
         public static String Unprotect64(String input, DataProtectionScope scope = DataProtectionScope.CurrentUser)
         {
             try
@@ -67,6 +85,12 @@ namespace BoxDataSync
             }
         }
 
+        /// <summary>
+        /// Ecrypts an arbitrary length btye array using the ProtectedData system call and returns the encrypted version in a byte array. 
+        /// </summary>
+        /// <param name="data">Data to be encrypted</param>
+        /// <param name="scope">DataProtectionScope to be used (default: DataProtectionScope.CurrentUser)</param>
+        /// <returns>Encrypted data byte array.</returns>
         public static byte[] Protect(byte[] data, DataProtectionScope scope = DataProtectionScope.CurrentUser)
         {
             try
@@ -81,6 +105,12 @@ namespace BoxDataSync
             }
         }
 
+        /// <summary>
+        /// Decrypts an arbitrary length byte array using the ProtectedData system call and returns the unencrypted version in a byte array.
+        /// </summary>
+        /// <param name="data">Data to be decrypted.</param>
+        /// <param name="scope">DataProtectionScope to be used (default: DataProtectionScope.CurrentUser)</param>
+        /// <returns>Decrypted data byte array.</returns>
         public static byte[] Unprotect(byte[] data, DataProtectionScope scope = DataProtectionScope.CurrentUser)
         {
             try
@@ -96,4 +126,6 @@ namespace BoxDataSync
             }
         }
     }
+#pragma warning restore CS0168
+
 }

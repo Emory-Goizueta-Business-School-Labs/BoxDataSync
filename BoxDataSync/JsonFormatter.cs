@@ -35,9 +35,18 @@ using System.Threading.Tasks;
 
 namespace BoxDataSync
 {
+    /// <summary>
+    /// JSON text formatter borrowed from Peter Long http://stackoverflow.com/questions/4580397/json-formatter-in-c
+    /// </summary>
     class JsonFormatter
     {
         private const string INDENT_STRING = "    ";
+
+        /// <summary>
+        /// Formats a JSON string with human readable indention and line breaks. 
+        /// </summary>
+        /// <param name="str">JSON string to be formatted</param>
+        /// <returns>Formatted string with line breaks and indention based on the structure of the JSON</returns>
         public static string FormatJson(string str)
         {
             var indent = 0;

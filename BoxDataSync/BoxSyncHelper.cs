@@ -26,7 +26,6 @@
  * 
  */
 
-using BoxDataSync.Properties;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,11 @@ using System.Net.Http;
 
 namespace BoxDataSync
 {
-
+    /// <summary>
+    /// This class is the primary interface to the Box.com API. Uses direct Box.com https calls rather than
+    /// using an API toolkit. Why? It seemed easier at the time, and Karsten had some great sample code I could borrow quickly. :)
+    /// Credits: Karsten Januszewski http://www.rhizohm.net/irhetoric/post/2014/08/25/A-Simple-BoxCom-C-API-Wrapper.aspx 
+    /// </summary>
     public static class BoxSyncHelper
     {
         private static string boxApiUrl = Program.boxApiUrl; 
@@ -45,7 +48,13 @@ namespace BoxDataSync
         private static int retryCount = 0;
 
         private static Boolean boxLoginStatus = false;
-
+        /// <summary>
+        /// Executes a Box.com API call direclty, waiting for and processing the return response. Handles API Login via OAUTH2
+        /// access token, refreshes via refresh token if necessary, and provides a return response object or throws an exception
+        /// </summary>
+        /// <param name="url">The fully specified API endpoint / target of the request</param>
+        /// <param name="httpMethod">HTTP Method of the API Endpoint, usually HttpMethod.Get</param>
+        /// <returns>A Return Stream of data from the API endpoint</returns>
         private static Stream DoBoxCall(string url, HttpMethod httpMethod)
         {
             Stream stream;
@@ -131,6 +140,11 @@ namespace BoxDataSync
 
             return returnStream;
         }
+
+        /// <summary>
+        /// Uses the Box refresh token to acquire a new access token when the access token has expired. Stores the updated tokens
+        /// in user storage.
+        /// </summary>
         private static void RefreshBoxToken()
         {
             String boxRefreshToken = Program.getSetting("boxRefreshToken");
@@ -157,13 +171,15 @@ namespace BoxDataSync
                     JObject jObject = jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                     Program.setSetting("boxAccessToken", (string)jObject["access_token"]);
                     Program.setSetting("boxRefreshToken", (string)jObject["refresh_token"]);
-                    //Settings.Default.boxAccessToken = (string)jObject["access_token"];
-                    //Settings.Default.boxRefreshToken = (string)jObject["refresh_token"];
-                    //Settings.Default.Save();
                 }
             }
         }
 
+        /// <summary>
+        /// Retrieves a JSON File Object (file meta data) for a single file stored at Box.com using the File ID 
+        /// </summary>
+        /// <param name="fileId">File ID to read</param>
+        /// <returns>JSON File Object</returns>
         public static string GetFileById(string fileId)
         {
             string url = string.Format("{0}files/{1}", boxApiUrl, fileId);
@@ -176,6 +192,11 @@ namespace BoxDataSync
             return reader.ReadToEnd();
         }
 
+        /// <summary>
+        /// Retrieves a JSON Folder Object (folder meta data and contents) for a single folder stored at Box.com using the Folder Id
+        /// </summary>
+        /// <param name="folderId">Folder ID to read</param>
+        /// <returns>JSON Folder Object including the Item Collection in the Folder (eg, list of folder and file mini-objects)</returns>
         public static string GetFolderById(string folderId)
         {
             string url = string.Format("{0}folders/{1}", boxApiUrl, folderId);
@@ -188,6 +209,11 @@ namespace BoxDataSync
 
             return reader.ReadToEnd();
         }
+
+        /// <summary>
+        /// Uses the provided Box Access Code in the OAUTH2 process to acquire box access and refresh tokens
+        /// </summary>
+        /// <param name="boxAccessCode">The CODE returned in the query string of the successful login redirect.</param>
         public static void Bootstrap(string boxAccessCode)
         {
             using (var request = new HttpRequestMessage() { RequestUri = new Uri("https://api.box.com/oauth2/token"), Method = HttpMethod.Post })
@@ -210,11 +236,6 @@ namespace BoxDataSync
                     JObject jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                     Program.setSetting("boxAccessToken", (string)jObject["access_token"]);
                     Program.setSetting("boxRefreshToken", (string)jObject["refresh_token"]);
-
-                    //Settings.Default.boxAccessToken = (string)jObject["access_token"];
-                    //Settings.Default.boxRefreshToken = (string)jObject["refresh_token"];
-                    //Settings.Default.Save();
-
                 }
                 else
                 {
@@ -227,6 +248,11 @@ namespace BoxDataSync
 
         }
 
+        /// <summary>
+        /// Reconciles a fully specified file path from the Box Root directory and returns the file ID of the associated file, if found.
+        /// </summary>
+        /// <param name="filePath">Box.com path to the file, eg, /path/to/a/file.txt</param>
+        /// <returns>The Box.com File ID for the file, if found.</returns>
         public static string GetFileIdByPath(string filePath)
         {
 
@@ -278,6 +304,13 @@ namespace BoxDataSync
             return returnid;
         }
 
+        /// <summary>
+        /// Recursively reconciles a fully specified folder path from the Box Root directory and returns the folder ID of the associated folder, if found.
+        /// </summary>
+        /// <param name="path">Box.com path to the folder, eg, /path/to/a/folder</param>
+        /// <param name="parentid">Should be called with ID=0 when a path is fully specified from the box root (this is the default and intended use case)
+        /// Used recursively to get the listing of each successive level from the ID provided.</param>
+        /// <returns>The Folder ID for folder, if found.</returns>
         public static string GetDirectoryIdByPath(string path, string parentid = "0")
         {
             char[] separator = { '\\', '/' };
@@ -328,6 +361,11 @@ namespace BoxDataSync
 
         }
 
+        /// <summary>
+        /// Downloads the contents of the Box.Com file specified (Binary file download).
+        /// </summary>
+        /// <param name="fileId">ID of the Box.com file to download.</param>
+        /// <returns>Returns a binary data stream representing the downloaded file.</returns>
         public static Stream GetFileAsStream(string fileId)
         {
             string url = string.Format("{0}files/{1}/content", boxApiUrl, fileId);
