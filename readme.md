@@ -63,6 +63,13 @@ C:> "C:\Program Files (x86)\Goizueta Business School\BoxDataSync\BoxDataSync.exe
 
 ## Credits
 by Jamie Anne Harrell
+Various contributions and ideas for this project were borrowed from:
+  Karsten Januszewski     http://www.rhizohm.net/irhetoric/post/2014/08/25/A-Simple-BoxCom-C-API-Wrapper.aspx 
+  David in Cambridge ???  https://codehosting.net/blog/BlogEngine/post/Simple-C-Web-Server
+  Peter Long              http://stackoverflow.com/questions/4580397/json-formatter-in-c
+  John Smith              http://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc
+  mgbowen @ stackoverflow http://stackoverflow.com/questions/1993903/how-do-i-do-a-sha1-file-checksum-in-c
+  MSDN, of Course         https://msdn.microsoft.com/en-us/library/2fh8203k(v=vs.110).aspx
 
 ## License
 Copyright (c) 2017 Goizueta Business School
