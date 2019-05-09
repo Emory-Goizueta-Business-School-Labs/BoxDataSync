@@ -85,8 +85,9 @@ C:> "C:\Program Files (x86)\Goizueta Business School\BoxDataSync\BoxDataSync.exe
 
 Version History:
 ----------------
- - 5/9/2019:  v1.0.0.1 - TLSv1.2 enabled
- - 2/21/2017: v1.0.0.0 - initial release
+ - 5/9/2019:  v1.0.2 - Revised version numbers
+ - 5/9/2019:  v1.0.1 - TLSv1.2 enabled
+ - 2/21/2017: v1.0.0 - initial release
 
 
 

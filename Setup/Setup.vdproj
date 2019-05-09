@@ -33,13 +33,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4B9DA2D3311EC1AE0470C10E1722AF2D"
+        "MsmKey" = "8:_4800D59678A170C66010FAF6745E8C16"
         "OwnerKey" = "8:_ACC00EEB4C7F44EB81C66DF2475678D1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_93E19F29FFB0EC15DBBA4D2EDFAD4F37"
+        "MsmKey" = "8:_4B9DA2D3311EC1AE0470C10E1722AF2D"
         "OwnerKey" = "8:_ACC00EEB4C7F44EB81C66DF2475678D1"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -52,25 +52,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_33DE6E813B5FCF630B4826A8749A0D9F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_ACC00EEB4C7F44EB81C66DF2475678D1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_93E19F29FFB0EC15DBBA4D2EDFAD4F37"
+        "OwnerKey" = "8:_4800D59678A170C66010FAF6745E8C16"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4B9DA2D3311EC1AE0470C10E1722AF2D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_33DE6E813B5FCF630B4826A8749A0D9F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -91,6 +91,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -107,6 +115,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -187,20 +211,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4B9DA2D3311EC1AE0470C10E1722AF2D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4800D59678A170C66010FAF6745E8C16"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4B9DA2D3311EC1AE0470C10E1722AF2D"
+                    "_4800D59678A170C66010FAF6745E8C16"
                     {
-                    "Name" = "8:System.Net.Http.WebRequest.dll"
+                    "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Net.Http.WebRequest.dll"
+            "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_38B6C7EB154044738D899A15EB3C4898"
@@ -218,20 +242,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_93E19F29FFB0EC15DBBA4D2EDFAD4F37"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4B9DA2D3311EC1AE0470C10E1722AF2D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_93E19F29FFB0EC15DBBA4D2EDFAD4F37"
+                    "_4B9DA2D3311EC1AE0470C10E1722AF2D"
                     {
-                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Name" = "8:System.Net.Http.WebRequest.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "SourcePath" = "8:System.Net.Http.WebRequest.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_38B6C7EB154044738D899A15EB3C4898"
@@ -305,15 +329,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BoxDataSync"
-        "ProductCode" = "8:{B2CA186E-C47E-4720-906B-DF4D71E9F8F8}"
-        "PackageCode" = "8:{15121972-E2A0-477E-B749-F432A87FE748}"
+        "ProductCode" = "8:{C265ED0D-4D95-4FAE-8E8C-D2506E242EA4}"
+        "PackageCode" = "8:{097E2FC4-EF07-4E28-BFEA-38C98DDA40DC}"
         "UpgradeCode" = "8:{FC90437B-C958-4D60-AA2F-C781CFBBDF39}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:Goizueta Business School"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -937,7 +961,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ACC00EEB4C7F44EB81C66DF2475678D1"
             {
-            "SourcePath" = "8:..\\BoxDataSync\\obj\\Debug\\BoxDataSync.exe"
+            "SourcePath" = "8:..\\BoxDataSync\\obj\\Release\\BoxDataSync.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_38B6C7EB154044738D899A15EB3C4898"
