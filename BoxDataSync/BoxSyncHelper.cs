@@ -30,6 +30,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 
 namespace BoxDataSync
@@ -57,6 +58,12 @@ namespace BoxDataSync
         /// <returns>A Return Stream of data from the API endpoint</returns>
         private static Stream DoBoxCall(string url, HttpMethod httpMethod)
         {
+            // Force TLS v1.2
+            if (ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls12) == false)
+            {
+                ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12;
+            }
+
             Stream stream;
             String boxAccessToken = Program.getSetting("boxAccessToken");
             if (BoxDataSync.Program.debug)
