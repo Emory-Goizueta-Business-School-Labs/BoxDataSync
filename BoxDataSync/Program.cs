@@ -127,6 +127,7 @@ using System.Net;
 using System.Collections.Specialized;
 using System.IO;
 using System.Security.Cryptography;
+using System.Reflection;
 
 namespace BoxDataSync
 {
@@ -417,6 +418,11 @@ namespace BoxDataSync
 
             int argcount = count - 1;
             // Check Command and argument(s) preconditions
+
+            Assembly assem = Assembly.GetExecutingAssembly();
+            AssemblyName assemName = assem.GetName();
+            Version ver = assemName.Version;
+
             switch (command)
             {
                 // display access token for current windows / box user
@@ -436,8 +442,13 @@ namespace BoxDataSync
                     if (argument2.Last() != '\\') { argument2 = argument2 + "\\"; } // Make sure the destination ends in a directory \ character
                     break;
 
+                case "version":
+                    Console.WriteLine("BoxDataSync version: {0}", ver);
+                    break;
+
                 default:
                     //throw (new System.ArgumentException("Unknown Command", command));
+                    Console.WriteLine("Unknown command. BoxDataSync version: {0}", ver);
                     break;
 
             }

@@ -154,6 +154,13 @@ namespace BoxDataSync
         /// </summary>
         private static void RefreshBoxToken()
         {
+
+            // Force TLS v1.2
+            if (ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls12) == false)
+            {
+                ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12;
+            }
+
             String boxRefreshToken = Program.getSetting("boxRefreshToken");
             using (var request = new HttpRequestMessage() { RequestUri = new Uri("https://www.box.com/api/oauth2/token"), Method = HttpMethod.Post })
             {
@@ -223,6 +230,13 @@ namespace BoxDataSync
         /// <param name="boxAccessCode">The CODE returned in the query string of the successful login redirect.</param>
         public static void Bootstrap(string boxAccessCode)
         {
+
+            // Force TLS v1.2
+            if (ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls12) == false)
+            {
+                ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12;
+            }
+
             using (var request = new HttpRequestMessage() { RequestUri = new Uri("https://api.box.com/oauth2/token"), Method = HttpMethod.Post })
             {
                 HttpContent content = new FormUrlEncodedContent(new[]
@@ -237,22 +251,32 @@ namespace BoxDataSync
 
                 );
                 request.Content = content;
-                var response = _httpClient.SendAsync(request).Result;
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    JObject jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                    Program.setSetting("boxAccessToken", (string)jObject["access_token"]);
-                    Program.setSetting("boxRefreshToken", (string)jObject["refresh_token"]);
+                    var response = _httpClient.SendAsync(request).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        JObject jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                        Program.setSetting("boxAccessToken", (string)jObject["access_token"]);
+                        Program.setSetting("boxRefreshToken", (string)jObject["refresh_token"]);
+                    }
+                    else
+                    {
+
+                        JObject jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                        Console.WriteLine("Error: {0}", (string)jObject["error_description"]);
+                    }
+
                 }
-                else
+                catch (System.AggregateException e)
                 {
-
-                    JObject jObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                    Console.WriteLine("Error: {0}", (string)jObject["error_description"]);
+                    if (Program.debug)
+                    {
+                        Console.WriteLine(" -- DEBUG EXCEPTION MESSAGE: {0}", e.Message);
+                        throw e;
+                    }
                 }
-
             }
-
         }
 
         /// <summary>

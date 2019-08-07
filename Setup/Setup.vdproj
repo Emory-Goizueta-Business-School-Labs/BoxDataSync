@@ -98,6 +98,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -152,7 +160,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -329,15 +337,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BoxDataSync"
-        "ProductCode" = "8:{C265ED0D-4D95-4FAE-8E8C-D2506E242EA4}"
-        "PackageCode" = "8:{097E2FC4-EF07-4E28-BFEA-38C98DDA40DC}"
+        "ProductCode" = "8:{D1735A66-0DC7-4985-A92A-94A0C0BE3279}"
+        "PackageCode" = "8:{83E1CAF7-9F1E-4240-9ED2-3F51A59F1906}"
         "UpgradeCode" = "8:{FC90437B-C958-4D60-AA2F-C781CFBBDF39}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:Goizueta Business School"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
